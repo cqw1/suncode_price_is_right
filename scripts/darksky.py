@@ -6,13 +6,6 @@ from datetime import timedelta
 zone_to_lat_lng = {}
 observations = []
 
-darksky_secret_key = "b65f72e167204b7288fcd365a6e1d4eb"
-
-"""
-https://api.darksky.net/forecast/[key]/[latitude],[longitude],[time]
-https://api.darksky.net/forecast/b65f72e167204b7288fcd365a6e1d4eb/42.3601,-71.0589,255657600?exclude=currently,minutely,daily,alerts,flags
-"""
-
 """
 Map each zone to the [lat, lng]. 
 
@@ -45,8 +38,6 @@ def write_observations(observations):
 """
 Grab the day's hourly observations for a lat,lng on the given time_secs
 
-Example request_url: https://api.darksky.net/forecast/b65f72e167204b7288fcd365a6e1d4eb/42.3601,-71.0589,1556582400?exclude=currently,minutely,daily,alerts,flags
-
 Params:
     lat: float
     lng: float 
@@ -56,7 +47,9 @@ Returns:
    Temperature measured by the station sometime between start and end
 """
 def get_hourlys(lat, lng, time_secs):
-    darksky_url = "https://api.darksky.net/forecast/b65f72e167204b7288fcd365a6e1d4eb/" \
+    darksky_api_key = "TODO"
+    darksky_url = "https://api.darksky.net/forecast/" \
+        datasky_api_key + "/" \
         "" + str(lat) + "," \
         "" + str(lng) + "," \
         "" + str(time_secs) + \
@@ -142,7 +135,6 @@ write_observations(observations)
 # Expected: 21.7 (degrees C)
 # print get_one_observation("KEMP", datetime(2019, 5, 18, 9), datetime(2019, 5, 18, 10))
 
-# Expected: https://api.darksky.net/forecast/b65f72e167204b7288fcd365a6e1d4eb/39.0693,-94.6716,1556582400?exclude=currently,minutely,daily,alerts,flags
 # List of {time, temp} for each hour that day
 # print get_hourlys(39.0693,-94.6716, 1556582400) 
 
